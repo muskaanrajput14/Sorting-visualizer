@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css">
+
+    <!-- For LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <title>Merge Sort</title>
+  </head>
+  <body>
+    <div id="container">
+      <div class="row text-center">
+        <div class="col-12 darkbg">
+          <h1>Merge Sort</h1>
+        </div>
+        <div class="col-12">
+          <div class="pad">
+            <br>
+            <h2>Merge Algorithm</h2>
+            <div class="col-lg-8 offset-lg-2">
+              <p class="summary">
+                This code takes two sorted arrays \(A\) and \(C\) and their lengths and creates a sorted array \(C\).
+                Because the two arrays \(A\) and \(B\) are sorted, a sorted array \(C\) can be created in linear time.
+                The algorithm considers each element from both arrays from the leftmost position and compares these elements to determine
+                which element is to be placed next in the output array. Because both arrays are sorted, the creation of the output array can be done in linear time \(O(n)\).
+              </p>
+            </div>
+
+            <img class="codeImage" src="./pictures/merge.png" alt="merge image">
+            <p>
+              Let \(M(n_1, n_2)\) be the number of comparisons that algorithm Merge does on line 6. <br>
+              \(M(n_1,n_2) \leq n_1 + n_2 -1 \)
+            </p> <br>
+            <h2>MergeSort Algorithm</h2>
+            <div class="col-lg-8 offset-lg-2">
+              <p class="summary">
+                This code takes a unsorted array \(A\) and sorts it in ascending order into the array \(C\).
+                This is done by recursively sorting the left half of the array \(A\) using \(Mergesort\), and recursively
+                sorting the right half of the array using \(Mergesort\). With two sorted subarrays \(A\) and \(B\), the
+                \(Merge\) code can be utilized to create sorted array \(C\). Because \(Mergesort\) is an effective
+                use of a divide and conquer algorithm where each subarray is roughly half the size of its parent, the recursive
+                calls to \(Mergesort\) are made in \(O(log(n))\) time. For each sorted subarray \(A\) and \(B\), the \(Merge\)
+                algorithm is called and from previous analysis, it is known this algorithm takes \(O(n)\) time. Therefore, the
+                \(Mergesort\) algorithm takes a worse case time of \(O(n(log(n)))\). Let's create and solve the recurrence relation
+                to show this!
+
+              </p>
+            </div>
+            <img class="codeImage" src="./pictures/mergesort.png" alt="merge sort image">
+            <br>
+            <p>
+              let \(C(n)\) be the number of comparisons that \(Mergesort\) does. <br>
+              There are \(C(n_1)\) comparisons for the recursive call on line 11. <br>
+              There are \(C(n_2)\) comparisons for the recursive call on line 12. <br>
+              There are \(n_1 + n_2 - 1\) comparisons from the call to \(Merge\) on line 13. <br><br>
+              Therefore the recurrence relation is as follows:
+            </p>
+            <p class="equation">
+              \(C(n) \leq C(n_1) + C(n_2) + n_1 + n_2 - 1 \) <br>
+              \(C(n) \leq C(\frac{n}{2}) + C(\frac{n}{2}) + \frac{n}{2} + \frac{n}{2} - 1 \) <br>
+              \(C(n) \leq C(\frac{n}{2}) + n - 1 \) <br><br>
+              Now solve the recurrence relation. <br>
+              \(C(n) \leq 2C(\frac{n}{2}) + n - 1 \) <br>
+              \(2C(\frac{n}{2}) \leq 2(2C(\frac{n}{4}) + \frac{n}{2} - 1) = 2^2C(\frac{n}{4}) + n-2\) <br>
+              \(2^2C(\frac{n}{4}) \leq 2^2(2C(\frac{n}{8}) + \frac{n}{4} - 1) = 2^3C(\frac{n}{8}) + n-4\) <br>
+              . . . <br>
+              \(\frac{n}{2}C(2) \leq \frac{n}{2}(2C(1)+(2-1)) = nC(1) + \frac{n}{2}\) <br>
+              \(nC(1) = 0 \) <br><br>
+            </p>
+            <p>
+              By adding and cancelling these terms, we get <br>
+            </p>
+            <p class="equation">
+              \(C(n) \leq (n-1) + (n-2) + (n-4) + \dots + (n - \frac{n}{2})\) <br>
+              \(C(n) \leq \displaystyle\sum_{i=0}^{k-1}n - \displaystyle\sum_{i=0}^{k-1} 2^i\) <br>
+              \(C(n) \leq kn - (n-1)\)<br>
+            </p>
+            <p>
+              By our assumption that \(n=2^k\) and \(k = \log_2n\)<br><br>
+              \(C(n) \leq n\log_2n-n+1\)
+            </p>
+            <br>
+
+            <h2>Merge Sort Visualizer</h2>
+            <div class="col-lg-8 offset-lg-2">
+              <p class="summary">
+                Below is a representation of the steps the \(Mergesort\) algorithm takes. This is shown by ordering columns
+                in ascending order. When the randomize button is invoked, a completely random ordering of columns is generated.
+                These random columns can be sorted by pressing the Merge Sort button. This website shows the steps that the
+                merge sort algorithm takes to sort objects. Enjoy viewing the algorithm.
+              </p>
+            </div>
+
+            <svg viewBox="0 0 383 250" id="SVG"></svg>
+          </div>
+        </div>
+        <div class="col-12 buttons">
+          <button id="randomBtn" type="button" class="btn btn-secondary" onclick="main(false)">Randomize</button>
+          <button id="mergeBtn" type="button" class="btn btn-secondary" onclick="main(true)">Merge Sort</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/main.js" charset="utf-8"></script>
+  </body>
+</html>

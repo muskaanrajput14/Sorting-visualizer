@@ -1,0 +1,81 @@
+html, body {
+  overflow-x: hidden;
+  background-color: #9facbf;
+}
+
+svg {
+  padding: 0;
+  max-height: 80vh;
+  width: 100%;
+}
+
+#container {
+  padding-bottom: 15px;
+}
+
+.pad {
+  border-radius: 5px;
+  margin: 0 10px;
+  margin-top: 10px;
+  background-color: #deebff;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+rect {
+  fill: #647e9c;
+  stroke: #313c47;
+  stroke-width: 1;
+}
+
+h1 {
+  font-size: 60px;
+  font-family: headerFont, sans-serif;
+  text-decoration: underline;
+}
+
+h2 {
+  font-family: headerFont, sans-serif;
+}
+
+.codeImage {
+  width: 50vw;
+  max-width: 1000px;
+  border-radius: 5px;
+  transition: width 0.2s;
+}
+
+.summary {
+  text-align: left;
+}
+
+a {
+  color: #415f8a;
+  text-decoration: none;
+  background-color: transparent;
+  transition: color 0.1s;
+}
+
+a:hover {
+  color: #618fcf;
+}
+
+@media screen and (max-width: 1000px) {
+  .codeImage {
+    width: 80vw;
+ }
+}
+
+@media screen and (max-width: 600px) {
+  #container {
+    margin-top: 5vh;
+  }
+  .codeImage {
+    width: 90vw;
+  }
+  .equation {
+    font-size: 3.5vw;
+  }
+}
